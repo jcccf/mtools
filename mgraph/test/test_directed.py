@@ -31,3 +31,11 @@ class TestDirected(unittest.TestCase):
   def test_roots(self):
     self.assertEqual(directed.roots(self.d4), [1])
     self.assertEqual(sorted(directed.roots(self.ds)), sorted([1, 3]))
+
+  def test_reach(self):
+    self.assertEqual(directed.reach(self.d4, 1), {0: 1, 1: 3, 2: 4})
+    self.assertEqual(directed.reach(self.d4, 1, cumulative=False),
+      {0: 1, 1: 2, 2: 1})
+
+  def test_breadths(self):
+    self.assertEqual(directed.breadths(self.d4, 1), {1: 0, 2: 1, 3: 2, 4: 1})
