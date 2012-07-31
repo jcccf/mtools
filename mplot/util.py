@@ -21,12 +21,12 @@ def parse_output_name(output_name):
 
 def sliding_window(value_list, window_size=10):
   out_values = []
-  cumulative = 0.0
-  for i, v in enumerate(value_list):
-    cumulative += v
-    if window_size <= i:
-      out_values.append(cumulative / window_size)
-      cumulative -= value_list[i - window_size + 1]
+  cumulative = sum(value_list[:window_size]) - 0.0
+  out_values = [cumulative / window_size]
+  for i in range(window_size, len(value_list)):
+    cumulative += value_list[i]
+    cumulative -= value_list[i - window_size]
+    out_values.append(cumulative / window_size)
   return out_values
 
 
@@ -58,4 +58,5 @@ def to_xylists(group, offset=0):
   raise Exception("Cannot parse this into xylists format!")
 
 if __name__ == '__main__':
+  print sliding_window([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
   print to_xylists([[1, 3], [2, 4]])
