@@ -3,14 +3,8 @@ from util import *
 
 def p(output_name, xylists1, xylists2, xlabel=None, ylabel=None, title=None,
   linetypes=['r', 'b'], xoffset=0, sliding=None, labels=['Plot1', 'Plot2']):
-  if sliding is not None:
-    xylists1 = sliding_window(xylists1)
-    xylists1 = to_xylists(xylists1, offset=sliding / 2)
-    xylists2 = sliding_window(xylists2)
-    xylists2 = to_xylists(xylists2, offset=sliding / 2)
-  else:
-    xylists1 = to_xylists(xylists1)
-    xylists2 = to_xylists(xylists2)
+  xylists1 = to_xylists(xylists1, sliding=sliding)
+  xylists2 = to_xylists(xylists2, sliding=sliding)
   plt.clf()
   if xlabel is not None:
     plt.xlabel(xlabel)
@@ -32,15 +26,8 @@ def p(output_name, xylists1, xylists2, xlabel=None, ylabel=None, title=None,
 def scales(name, xylists1, xylists2, xlabel='', ylabel='', title='',
   linetypes=['b', 'r', 'g', 'k'], sliding=None, labels=['Plot1', 'Plot2'],
   xlog=None, ylim=None):
-
-  if sliding is not None:
-    xylists1 = sliding_window(xylists1)
-    xylists1 = to_xylists(xylists1, offset=sliding / 2)
-    xylists2 = sliding_window(xylists2)
-    xylists2 = to_xylists(xylists2, offset=sliding / 2)
-  else:
-    xylists1 = to_xylists(xylists1)
-    xylists2 = to_xylists(xylists2)
+  xylists1 = to_xylists(xylists1, sliding=sliding)
+  xylists2 = to_xylists(xylists2, sliding=sliding)
 
   plt.clf()
   if len(xlabel) > 0:

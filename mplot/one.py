@@ -4,11 +4,7 @@ from util import *
 
 def p(output_name, xylists, xlabel=None, ylabel=None, title=None,
   linetype='k', xoffset=0, sliding=None):
-  if sliding is not None:
-    xylists = sliding_window(xylists)
-    xylists = to_xylists(xylists, offset=sliding / 2)
-  else:
-    xylists = to_xylists(xylists)
+  xylists = to_xylists(xylists, sliding=sliding)
   plt.clf()
   if xlabel is not None:
     plt.xlabel(xlabel)
