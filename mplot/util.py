@@ -64,7 +64,7 @@ def to_xylists(group, offset=0, sliding=None):
     else:
       return xylists
 
-  slide_offset = sliding/2 if sliding is not None else 0
+  offset += sliding/2 if sliding is not None else 0
 
   if isinstance(group, dict):
     xys = sorted(group.iteritems())
@@ -73,7 +73,8 @@ def to_xylists(group, offset=0, sliding=None):
     if isinstance(group[0], tuple) and len(group[0]) == 2:
       return slide_me_maybe(zip(*group))
     elif isinstance(group[0], int) or isinstance(group[0], float):
-      return [range(offset, len(group) + offset + slide_offset), slide_me_maybe(group)]
+      slide = slide_me_maybe(group)
+      return [range(offset, len(slide) + offset), slide]
     elif len(group) == 2:
       if reduce(lambda x, y: x and isinstance(y, list), group, True):
         if len(group[0]) == len(group[1]):

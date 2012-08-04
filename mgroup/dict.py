@@ -12,5 +12,10 @@ def cumulative(dicty):
   return dict_sort
 
 
+def percentage(dicty):
+  maxv = max(dicty.itervalues())
+  return dict([(k, (v - 0.0) / maxv) for k, v in dicty.iteritems()])
+
+
 if __name__ == '__main__':
   print cumulative({1: 1, 2: 3})
