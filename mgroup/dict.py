@@ -17,5 +17,10 @@ def percentage(dicty):
   return dict([(k, (v - 0.0) / maxv) for k, v in dicty.iteritems()])
 
 
+def percentage_sum(dicty):
+  total = sum(dicty.itervalues())
+  return dict([(k, (v - 0.0) / total) for k, v in dicty.iteritems()])
+
+
 if __name__ == '__main__':
   print cumulative({1: 1, 2: 3})
