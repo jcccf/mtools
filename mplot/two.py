@@ -50,5 +50,7 @@ def scales(name, xylists1, xylists2, xlabel='', ylabel='', title='',
   ax2.plot(xylists2[0], xylists2[1], linetypes[1], label=labels[1])
   for tl in ax2.get_yticklabels():
     tl.set_color(linetypes[1])
+  if len(xlabel) > 0:
+    ax1.set_xlabel(xlabel)
   ax2.set_ylabel(labels[1], color=linetypes[1])
   plt.savefig(parse_output_name(name))

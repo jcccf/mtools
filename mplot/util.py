@@ -71,6 +71,7 @@ def to_xylists(group, offset=0, sliding=None):
     return slide_me_maybe(zip(*xys))
   elif isinstance(group, list):
     if isinstance(group[0], tuple) and len(group[0]) == 2:
+      group = sorted(group)
       return slide_me_maybe(zip(*group))
     elif isinstance(group[0], int) or isinstance(group[0], float):
       slide = slide_me_maybe(group)
