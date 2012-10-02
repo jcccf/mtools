@@ -28,11 +28,20 @@ Supports ActiveRecord-style chained queries
 
     from mtools import mdb
     db = mdb.mysql.MMySQL('my_database', host='my_host', username='my_username', password='my_password')
-    # Get a single rows
+    
+    # Get a single row
     print db.users_table.select('name').where(id=10).first()
+    
     # Get multiple rows
     for user in db.users_table.select('id', 'location').where(location='SF').order_by('age DESC').limit(100):
       print user
+    
+    # Get everything
+    for user in db.users_table:
+      print user
+
+    # Chain whichever way you want
+    db.limit(2).select('id').order_by('name', 'id DESC').where(location='SF').select('name', 'location')
 
 Regular queries are also supported
 
