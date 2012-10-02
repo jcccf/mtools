@@ -41,7 +41,7 @@ Supports ActiveRecord-style chained queries
       print user
 
     # Chain whichever way you want
-    db.limit(2).select('id').order_by('name', 'id DESC').where(location='SF').select('name', 'location')
+    db.users_table.limit(2).select('id').order_by('name', 'id DESC').where(location='SF').select('name', 'location')
 
 Regular queries are also supported
 

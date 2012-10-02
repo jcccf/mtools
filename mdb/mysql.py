@@ -25,12 +25,18 @@ class MMySQL(object):
     def next(self):
       row = self.result.fetchone()
       if row is None:
+        self.result.close()
         raise StopIteration
       return row
 
+    def query_plan(self):
+      return self.__build_query()
+
     def all(self):
       self.__iter__()
-      return self.result.fetchall()
+      res = self.result.fetchall()
+      self.result.close()
+      return res
 
     def first(self):
       self.__iter__()
@@ -62,8 +68,11 @@ class MMySQL(object):
         svals, stuple = ' WHERE ', ()
         for k, v in self.wheres.items():
           if v is not None:
-            svals += k + '=%s AND '
-            stuple += (v,)
+            if isinstance(v, tuple) and len(v) == 0:
+              svals += k + " IS NOT NULL AND "
+            else:
+              svals += k + '=%s AND '
+              stuple += (v,)
           else:
             svals += k + " IS NULL AND "
         svals = svals[:-5]
@@ -122,24 +131,28 @@ class MMySQL(object):
     return MMySQL.MDbTable(self, name)
 
   def q(self, query, tuples=None):
+    c = self.conn.cursor()
     '''Make a database query and return all rows'''
     try:
       if tuples:
-        self.c.execute(query, tuples)
+        c.execute(query, tuples)
       else:
-        self.c.execute(query)
-      return self.c.fetchall()
+        c.execute(query)
+      res = c.fetchall()
+      c.close()
+      return res
     except MySQLdb.IntegrityError as err:
       print "Integrity Error | %s" % err
       return -2
 
   def i(self, query, tuples=None):
+    c = self.conn.cursor()
     '''Make a database query and return the cursor (useful for iterating)'''
     if tuples:
-      self.c.execute(query, tuples)
+      c.execute(query, tuples)
     else:
-      self.c.execute(query)
-    return self.c
+      c.execute(query)
+    return c
 
   def commit(self):
     self.conn.commit()
@@ -149,8 +162,3 @@ class MMySQL(object):
 
   def close(self):
     self.c.close()
-
-if __name__ == '__main__':
-  db = MMySQL('hciclass')
-  for i in db.users.select('id', 'facebook_id').where(coursera_id=33851):
-    print i
