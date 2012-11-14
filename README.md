@@ -5,10 +5,10 @@ A collection of Python convenience functions
 
 Usage
 -----
-    from * import mtools
+    from mtools import *
     depth = mgraph.directed.depth(my_networkx_graph)
 
-mplot must be manually imported as mplot significantly slows loading times
+mplot, mlang and mdb must be manually imported
 
     from random import random
     from mtools import mplot
@@ -40,11 +40,18 @@ Supports ActiveRecord-style chained queries
     for user in db.users_table:
       print user
 
+    # Count the number of distinct ids in a table
+    print db.users_table.count('DISTINCT id').where(location='NY').first()
+
     # Chain whichever way you want
     db.users_table.limit(2).select('id').order_by('name', 'id DESC').where(location='SF').select('name', 'location')
 
 Regular queries are also supported
 
+    # Use db.q if you want to get everything at once
+    users = db.q('SELECT * FROM users WHERE location = %s AND age > %s', (some_location, some_age))
+
+    # Use db.i if you want an iterator instead
     for user in db.i('SELECT * FROM users'):
       print user
 
@@ -54,7 +61,7 @@ Remember to commit your changes if you modify the database!
 
 MPlot
 -----
-Plot a single line plot
+Plot two lines with different scales
 
     from mtools import mplot
     xylist1 = [0, 1, 2]
