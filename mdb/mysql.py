@@ -97,6 +97,15 @@ class MMySQL(object):
       self.selects += selects
       return self
 
+    def count(self, what=None):
+      if self.selects is None:
+        self.selects = []
+      if what is not None:
+        self.selects += ['COUNT(' + what + ') AS numfound']
+      else:
+        self.selects += ['COUNT(*) AS numfound']
+      return self
+
     def where(self, **vals):
       if self.wheres is None:
         self.wheres = {}

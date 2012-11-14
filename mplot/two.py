@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from util import *
 
+
 def p(output_name, xylists1, xylists2, xlabel=None, ylabel=None, title=None,
   linetypes=['r', 'b'], xoffset=0, sliding=None, labels=['Plot1', 'Plot2']):
   xylists1 = to_xylists(xylists1, sliding=sliding)
@@ -20,6 +21,22 @@ def p(output_name, xylists1, xylists2, xlabel=None, ylabel=None, title=None,
 
   plt.legend()
 
+  plt.savefig(parse_output_name(output_name))
+
+
+def hist(output_name, values1, values2, bins=100, xlabel=None, ylabel=None,
+  title=None, linetype='k', normed=False, labels=['Plot1', 'Plot2']):
+  plt.clf()
+  if xlabel is not None:
+    plt.xlabel(xlabel)
+  if ylabel is not None:
+    plt.ylabel(ylabel)
+  if title is not None:
+    plt.title(title)
+  plt.hist(values1, bins=bins, histtype='stepfilled', color='b', linewidth=0, alpha=0.5, normed=normed, label=labels[0])
+  plt.hist(values2, bins=bins, histtype='stepfilled', color='r', linewidth=0, alpha=0.5, normed=normed, label=labels[1])
+  leg = plt.legend(loc='best', fancybox=True)
+  leg.get_frame().set_alpha(0.5)
   plt.savefig(parse_output_name(output_name))
 
 
