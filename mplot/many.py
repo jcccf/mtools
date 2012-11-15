@@ -71,7 +71,7 @@ def p(output_name, many_xylists, xlabel=None, ylabel=None, title=None,
 
   box = ax.get_position()
   ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
-  ax.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+  ax.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fancybox=True, prop={'size':10})
 
   plt.savefig(parse_output_name(output_name))
 
