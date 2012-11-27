@@ -46,6 +46,9 @@ Supports ActiveRecord-style chained queries
     # Chain whichever way you want
     db.users_table.limit(2).select('id').order_by('name', 'id DESC').where(location='SF').select('name', 'location')
 
+    # Insert without duplicates
+    db.users_table.insert_if_not_exists(username='john', email='john@doe.corp')
+
 Regular queries are also supported
 
     # Use db.q if you want to get everything at once

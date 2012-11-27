@@ -123,6 +123,11 @@ class MMySQL(object):
       self.limit = limit
       return self
 
+    def insert_if_not_exists(self, **vals):
+      if self.count().where(**vals).first()[0] == 0:
+        self.insert(**vals)
+      return self
+
     def insert(self, **vals):
       snames, svals, stuple = '(', 'VALUES(', ()
       for k, v in vals.items():
