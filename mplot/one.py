@@ -12,13 +12,15 @@ def p(output_name, xylists, xlabel=None, ylabel=None, title=None,
     plt.ylabel(ylabel)
   if title is not None:
     plt.title(title)
+
+  xlist, ylist = xylists
+  plt.plot(xlist, ylist, linetype)
+
   if xlim is not None:
     plt.xlim(xlim)
   if ylim is not None:
     plt.ylim(ylim)
 
-  xlist, ylist = xylists
-  plt.plot(xlist, ylist, linetype)
   plt.savefig(parse_output_name(output_name))
 
 
