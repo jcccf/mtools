@@ -3,7 +3,7 @@ from util import *
 
 
 def p(output_name, xylists, xlabel=None, ylabel=None, title=None,
-  linetype='k', xoffset=0, sliding=None):
+  linetype='k', xoffset=0, sliding=None, xlim=None, ylim=None):
   xylists = to_xylists(xylists, sliding=sliding)
   plt.clf()
   if xlabel is not None:
@@ -12,6 +12,10 @@ def p(output_name, xylists, xlabel=None, ylabel=None, title=None,
     plt.ylabel(ylabel)
   if title is not None:
     plt.title(title)
+  if xlim:
+    plt.xlim(xlim)
+  if ylim:
+    plt.ylim(ylim)
 
   xlist, ylist = xylists
   plt.plot(xlist, ylist, linetype)
