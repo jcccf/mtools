@@ -17,9 +17,9 @@ def p(output_name, xylists, xlabel=None, ylabel=None, title=None,
   plt.plot(xlist, ylist, linetype)
 
   if xlim is not None:
-    plt.xlim(xlim)
+    plt.xlim(*xlim)
   if ylim is not None:
-    plt.ylim(ylim)
+    plt.ylim(*ylim)
 
   plt.savefig(parse_output_name(output_name))
 
