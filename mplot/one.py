@@ -12,9 +12,9 @@ def p(output_name, xylists, xlabel=None, ylabel=None, title=None,
     plt.ylabel(ylabel)
   if title is not None:
     plt.title(title)
-  if xlim:
+  if xlim is not None:
     plt.xlim(xlim)
-  if ylim:
+  if ylim is not None:
     plt.ylim(ylim)
 
   xlist, ylist = xylists
