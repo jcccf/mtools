@@ -38,7 +38,7 @@ def pin(output_name, many_xylists, xlabel=None, ylabel=None, title=None,
   plt.savefig(parse_output_name(output_name))
 
 def p(output_name, many_xylists, xlabel=None, ylabel=None, title=None,
-  color=None, sliding=None, labels=[], average=True):
+  color=None, sliding=None, labels=[], average=True, xlim=None, points='o'):
   xylists = [to_xylists(xylist, sliding=sliding) for xylist in many_xylists]
   plt.clf()
   if xlabel is not None:
@@ -47,6 +47,9 @@ def p(output_name, many_xylists, xlabel=None, ylabel=None, title=None,
     plt.ylabel(ylabel)
   if title is not None:
     plt.title(title)
+
+  if xlim is not None:
+    plt.xlim(*xlim)
 
   if len(labels) < len(many_xylists):
     for i in range(len(labels), len(many_xylists)):
@@ -67,7 +70,7 @@ def p(output_name, many_xylists, xlabel=None, ylabel=None, title=None,
     ax.plot(xs, ys, linewidth=2, color='k')
 
   for i, (xlist, ylist) in enumerate(xylists):
-    ax.plot(xlist, ylist, marker='o', markeredgecolor='none', color=color[i], label=labels[i])
+    ax.plot(xlist, ylist, marker=points, markeredgecolor='none', color=color[i], label=labels[i])
 
   box = ax.get_position()
   ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])

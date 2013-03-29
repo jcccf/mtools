@@ -17,10 +17,12 @@ mplot, mlang and mdb must be manually imported
 Modules
 -------
 * mdb - MySQL convenience functions (depends on python-mysqldb)
+* mfile - File management functions
 * mgraph - Graph functions to use with networkx (depends on networkx)
 * mgroup - List and dictionary convenience functions
 * mlang - NLP convenience functions (depends on nltk)
 * mplot - Chart plotting convenience functions (depends on matplotlib)
+* mstring - String manipulation functions
 
 MDb
 ---
